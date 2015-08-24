@@ -14,6 +14,4 @@ class Post extends BaseModel {
         'body'       => 'required|max:10000'
     );
 
-    public static $test = 'Some string';
-
 }

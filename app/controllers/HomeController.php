@@ -15,9 +15,15 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
-	}
+    public function showWelcome()
+    {
+        return Redirect::action('HomeController@sayHello', array('Bob'));
+    }
+
+    public function sayHello()
+    {
+        // $data = array('name' => $name);
+        return View::make('my-first-view');
+    }
 
 }

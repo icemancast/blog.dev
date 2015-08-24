@@ -16,3 +16,6 @@
 
 ## Troubleshooting
 - If a class name is not found and you see the file containing it, try running `composer dump-autoload` from your VM.
+
+## ENV Setup
+Use `env-template.php` as your template for $_ENV variables. Copy the contents of `env-template.php` to your own `.env.local.php` file prior to requesting any db driven pages or artisan commands.

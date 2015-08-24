@@ -41,6 +41,8 @@ class PostsController extends \BaseController {
 
             Session::flash('errorMessage', 'Something went wrong. Please read errors below:');
 
+            Log::info('Validator failed', Input::all());
+
             return Redirect::back()->withInput()->withErrors($validator);
 
         } else {
@@ -50,7 +52,7 @@ class PostsController extends \BaseController {
             $post->body = Input::get('body');
             $post->save();
 
-            Log::info("Post successfully saved.");
+            Log::info("Post successfully saved.", Input::all());
 
             Session::flash('successMessage', 'You created ' . $post->title . ' post successfully');
 
@@ -76,7 +78,9 @@ class PostsController extends \BaseController {
             App::abort(404);
         }
 
-            return View::make('posts.show')->with(array('post' => $post));
+        Log::info("post of id $id found");
+
+        return View::make('posts.show')->with(array('post' => $post));
 	}
 
 

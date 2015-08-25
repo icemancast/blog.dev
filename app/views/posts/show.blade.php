@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <h2>{{ $post->title }}</h2>
+    <h2>{{{ $post->title }}}</h2>
 
-    <p>{{ $post->body }}</p>
+    <p>{{{ $post->body }}}</p>
 
     @if(Session::has('test'))
         {{ Session::get('test') }}
@@ -24,7 +24,7 @@
 
 @section('script')
     <script>
-        
+
         (function(){
 
             "use strict";

@@ -62,11 +62,11 @@
                     @endforeach
                 </ul>
             </div>
-        
+
         @endif
 
         @yield('content')
-      
+
     </div><!-- /.container -->
 
 
@@ -78,7 +78,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     @yield('script')
-   
+
   </body>
 </html>
 

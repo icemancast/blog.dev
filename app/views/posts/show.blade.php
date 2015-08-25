@@ -3,7 +3,7 @@
 @section('content')
 
     <h2>{{{ $post->title }}}</h2>
-
+    <p>{{ $post->user->first_name }}</p>
     <p>{{{ $post->body }}}</p>
 
     @if(Session::has('test'))

@@ -13,13 +13,29 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+    public function index()
+    {
         // set a value in the session
-        $posts = Post::with('user')->paginate(4);
-		return View::make('posts.index')->with(array('posts' => $posts));
-	}
+        $query = Post::with('user');
 
+        if (Input::has('search')) {
+            $search = Input::get('search');
+
+            $query->where('title', 'like', "%$search%");
+
+            $query->orWhereHas('user', function($q) use ($search) {
+                $q->where('first_name', 'like',  "%$search%");
+            });
+
+            $query->orWhereHas('user', function($q) use ($search) {
+                $q->where('last_name', 'like',  "%$search%");
+            });
+        }
+
+        $posts = $query->orderBy('created_at', 'desc')->paginate(5);
+
+        return View::make('posts.index')->with('posts', $posts);
+    }
 
 	/**
 	 * Show the form for creating a new resource.

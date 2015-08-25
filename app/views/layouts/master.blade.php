@@ -57,7 +57,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <main class="container">
         @if (Session::has('successMessage'))
             <div class="alert alert-success">{{{ Session::get('successMessage') }}}</div>
         @endif
@@ -66,7 +66,7 @@
         @endif
 
         @yield('content')
-    </div><!-- /.container -->
+    </main><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

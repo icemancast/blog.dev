@@ -7,7 +7,6 @@ class PostsTableSeeder extends Seeder {
 
     public function run()
     {
-        Post::truncate();
 
         $faker = Faker::create();
 
@@ -16,6 +15,7 @@ class PostsTableSeeder extends Seeder {
             $post = new Post();
             $post->title = $faker->catchPhrase;
             $post->body  = $faker->realText;
+            $post->user_id = User::all()->random(1)->id;
             $post->save();
         }
     }

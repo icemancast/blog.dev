@@ -8,6 +8,8 @@
 
     @foreach($posts as $post)
         <h2><a href="{{ action('PostsController@show', $post->id) }}">{{ $post->title }}</a></h2>
-        {{{ $post->body }}}
+        <p><em>{{ $post->user->first_name }} {{ $post->user->last_name }}</em></p>
+
+        {{{ Str::words($post->body, 20) }}}
     @endforeach
 @stop

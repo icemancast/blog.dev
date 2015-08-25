@@ -1,7 +1,9 @@
 <?php
 
-class PostsController extends \BaseController {
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+class PostsController extends \BaseController
+{
     public function __construct()
     {
         parent::__construct();
@@ -47,7 +49,6 @@ class PostsController extends \BaseController {
 		return View::make('posts.create');
 	}
 
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -62,7 +63,6 @@ class PostsController extends \BaseController {
         return $this->validateAndSave($post);
     }
 
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -74,7 +74,6 @@ class PostsController extends \BaseController {
 		$post = Post::find($id);
 
         if(!$post) {
-
             Session::flash('errorMessage', "Post with id of $id is not found");
 
             App::abort(404);
@@ -84,7 +83,6 @@ class PostsController extends \BaseController {
 
         return View::make('posts.show')->with(array('post' => $post));
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -97,7 +95,6 @@ class PostsController extends \BaseController {
         $post = Post::find($id);
 
         if(!$post) {
-
             Session::flash('errorMessage', "Post with id of $id is not found");
 
             App::abort(404);
@@ -105,7 +102,6 @@ class PostsController extends \BaseController {
 
 		return View::make('posts.edit')->with(['post' => $post]);
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -132,13 +128,11 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-
-        $post = Post::find($id);
-
-        if(!$post) {
-
+    public function destroy($id)
+    {
+        try {
+            $post = Post::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
             Session::flash('errorMessage', "Post with id of $id is not found");
 
             App::abort(404);
@@ -146,8 +140,10 @@ class PostsController extends \BaseController {
 
         $post->delete();
 
+        Session::flash('successMessage', "Deleted \"$post->title\"!");
+
         return Redirect::action('PostsController@index');
-	}
+    }
 
     protected function validateAndSave(Post $post)
     {

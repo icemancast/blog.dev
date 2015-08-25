@@ -6,8 +6,6 @@ class UsersTableSeeder extends Seeder {
 
     public function run()
     {
-        User::truncate();
-
         $this->createEnvUser();
         $this->createFakeUsers();
     }

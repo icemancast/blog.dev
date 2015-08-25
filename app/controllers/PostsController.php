@@ -10,7 +10,7 @@ class PostsController extends \BaseController {
 	public function index()
 	{
         // set a value in the session
-        $posts = Post::paginate(4);
+        $posts = Post::with('user')->paginate(4);
 		return View::make('posts.index')->with(array('posts' => $posts));
 	}
 

@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@sayHello');
+Route::get('/', 'HomeController@showWelcome');
 
 Route::resource('posts', 'PostsController');
+
+Route::get('login', 'HomeController@showLogin');
+Route::post('login', 'HomeController@doLogin');
+Route::get('logout', 'HomeController@doLogout');

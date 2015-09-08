@@ -140,9 +140,26 @@ class PostsController extends \BaseController
 
         $post->delete();
 
-        Session::flash('successMessage', "Deleted \"$post->title\"!");
 
-        return Redirect::action('PostsController@index');
+        if (Request::wantsJson()) {
+            return Response::json(array('result' => 'Ok'));
+        } else {
+            Session::flash('successMessage', "Deleted \"$post->title\"!");
+
+            return Redirect::action('PostsController@index');
+        }
+    }
+
+    public function getManage()
+    {
+        return View::make('posts.manage');
+    }
+
+    public function getList()
+    {
+        $posts = Post::with('user')->get();
+
+        return Response::json($posts);
     }
 
     protected function validateAndSave(Post $post)

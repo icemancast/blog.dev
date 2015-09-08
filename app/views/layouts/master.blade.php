@@ -36,7 +36,8 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="{{{ Route::currentRouteUses('PostsController@index') ? 'active' : '' }}}">
-                        <a href="{{ action('PostsController@index') }}">Posts</a></li>
+                        <a href="{{ action('PostsController@index') }}">Posts</a>
+                    </li>
                     @if (Auth::check())
                         <li class="{{{ Route::currentRouteUses('PostsController@create') ? 'active' : '' }}}">
                             <a href="{{ action('PostsController@create') }}">Create Post</a>

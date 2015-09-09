@@ -13,6 +13,9 @@
 
 Route::get('/', 'HomeController@showWelcome');
 
+Route::get('posts/manage', 'PostsController@getManage');
+Route::get('posts/list', 'PostsController@getList');
+
 Route::resource('posts', 'PostsController');
 
 Route::get('login', 'HomeController@showLogin');

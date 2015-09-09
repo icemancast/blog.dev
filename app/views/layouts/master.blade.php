@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <meta name="csrf-token" content="{{{ csrf_token() }}}">
+
     <title>My Blog</title>
 
     <!-- Bootstrap core CSS -->
@@ -36,7 +38,8 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="{{{ Route::currentRouteUses('PostsController@index') ? 'active' : '' }}}">
-                        <a href="{{ action('PostsController@index') }}">Posts</a></li>
+                        <a href="{{ action('PostsController@index') }}">Posts</a>
+                    </li>
                     @if (Auth::check())
                         <li class="{{{ Route::currentRouteUses('PostsController@create') ? 'active' : '' }}}">
                             <a href="{{ action('PostsController@create') }}">Create Post</a>
